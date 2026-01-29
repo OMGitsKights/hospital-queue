@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import AppointmentForm from "./AppointmentForm";
+import QueueDashboard from "./QueueDashboard";
 
-function App() {
+export default function App() {
+  const [selectedHospital, setSelectedHospital] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: "flex", gap: "40px", padding: "20px" }}>
+      {/* LEFT PANEL */}
+      <div style={{ width: "30%" }}>
+        <QueueDashboard hospital={selectedHospital} />
+      </div>
+
+      {/* RIGHT PANEL */}
+      <div style={{ width: "70%" }}>
+        <h1>🏥 Hospital Queue Optimization System</h1>
+        <AppointmentForm onHospitalSelect={setSelectedHospital} />
+      </div>
     </div>
   );
 }
-
-export default App;
