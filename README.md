@@ -1,71 +1,67 @@
-# Getting Started with Create React App
+# CareFlo - Hospital Queue Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**CareFlo** is a streamlined solution for managing hospital appointments, reducing waiting times, and improving the overall patient experience through a digital queue system.
 
-## Available Scripts
+![License](https://img.shields.io/badge/license-MIT-blue)
+![React](https://img.shields.io/badge/frontend-React-61DAFB)
+![Flask](https://img.shields.io/badge/backend-Flask-000000)
 
-In the project directory, you can run:
+## 📋 Features
 
-### `npm start`
+*   **Role-Based Access**: Specialized portals for Admins, Doctors, and Patients.
+*   **Real-time Queue Status**: Visual indicators of waiting lines.
+*   **Digital Prescriptions**: Doctors can issue prescriptions directly within the app.
+*   **Multi-Language Support**: English, Hindi, and Telugu.
+*   **Secure Authentication**: Token-based login system.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+See [FEATURES.md](./docs/FEATURES.md) for a complete list.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Quick Start
 
-### `npm test`
+### Prerequisites
+*   Node.js (v14+)
+*   Python (v3.8+)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Backend Setup
+Navigate to the `backend` directory:
+```bash
+cd backend
+# Install dependencies (Flask, Flask-CORS)
+pip install flask flask-cors werkzeug
+# Run the server
+python app.py
+```
+The server will start on `http://localhost:5001`.
 
-### `npm run build`
+### 2. Frontend Setup
+Navigate to the project root:
+```bash
+# Install dependencies
+npm install
+# Start the application
+npm start
+```
+The app will run on `http://localhost:3000`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📚 Documentation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+We have detailed documentation to help you understand and contribute to the project:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+*   **[Architecture](./docs/ARCHITECTURE.md)**: High-level system design.
+*   **[API Documentation](./docs/API.md)**: Specifications for backend endpoints.
+*   **[Database Schema](./docs/DATABASE.md)**: Data structure details.
+*   **[Development Guide](./docs/DEVELOPMENT.md)**: Setup and coding standards.
+*   **[Contributing](./docs/CONTRIBUTING.md)**: How to get involved.
+*   **[Roadmap](./docs/ROADMAP.md)**: Future plans and requested features.
 
-### `npm run eject`
+## 👥 Roles & Credentials (Default)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Role | Username | Password |
+|------|----------|----------|
+| **Admin** | `admin` | `adminpass` |
+| **Doctor** | `doctor` | `doctorpass` |
+| **Patient** | `patient` | `patientpass` |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📄 License
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# hospital-queue
+This project is licensed under the MIT License - see the [LICENSE](./docs/LICENSE.md) file for details.
