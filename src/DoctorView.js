@@ -165,7 +165,7 @@ export default function DoctorView({ selectedHospital, selectedDate }) {
 
   const auth = AuthService.getAuth();
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
-  
+
   // Use local selections, fallback to auth data
   const hospital = selectedHospitalLocal || auth?.hospital || "";
   const department = selectedDepartmentLocal || auth?.department || "General";
@@ -185,7 +185,7 @@ export default function DoctorView({ selectedHospital, selectedDate }) {
       if (hospital) params.append("hospital", hospital);
       if (department) params.append("department", department);
       if (params.toString()) url += `?${params.toString()}`;
-      
+
       const res = await AuthService.authFetch(url);
       if (!res.ok) {
         if (res.status === 401) {
@@ -260,12 +260,12 @@ export default function DoctorView({ selectedHospital, selectedDate }) {
       // Use hospital and date from patient record (included in response from backend)
       const hospitalToUse = patient.hospital || hospital;
       const dateToUse = patient.date || selectedDate;
-      
+
       if (!hospitalToUse || !dateToUse) {
         alert("Hospital or date information missing");
         return;
       }
-      
+
       const res = await AuthService.authFetch(`${BACKEND_URL}/patient-done`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -280,20 +280,20 @@ export default function DoctorView({ selectedHospital, selectedDate }) {
         const errData = await res.json().catch(() => ({}));
         throw new Error(errData.error || "Failed to mark patient as done");
       }
-      
+
       await res.json();
-      
+
       // Remove the booking from localStorage to free up the slot
       const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-      const filtered = bookings.filter(b => 
-        !(b.date === dateToUse && 
-          b.hospital === hospitalToUse && 
-          b.department === department && 
+      const filtered = bookings.filter(b =>
+        !(b.date === dateToUse &&
+          b.hospital === hospitalToUse &&
+          b.department === department &&
           b.slot === patient.slot &&
           b.name === patient.name)
       );
       localStorage.setItem("bookings", JSON.stringify(filtered));
-      
+
       fetchPatients(); // Refresh list
     } catch (err) {
       alert("Error marking patient as done: " + err.message);
@@ -418,14 +418,26 @@ export default function DoctorView({ selectedHospital, selectedDate }) {
     background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
     color: "white",
     boxShadow: "0 4px 12px rgba(102, 126, 234, 0.4)",
-    zIndex: 9999,
     animation: "slideIn 0.3s ease-out",
+  };
+
+  const emergencyBadgeStyle = {
+    padding: "2px 6px",
+    background: "#fee2e2",
+    color: "#dc2626",
+    borderRadius: "4px",
+    fontSize: "10px",
+    fontWeight: "bold",
+    border: "1px solid #fecaca",
+    display: "inline-block",
+    marginLeft: "8px",
+    verticalAlign: "middle"
   };
 
   return (
     <div style={containerStyle}>
       <h3 style={{ marginBottom: 4 }}>Doctor Dashboard</h3>
-      
+
       {/* Hospital and Department Selectors */}
       <div style={{ marginBottom: 16, display: "flex", gap: 12, flexWrap: "wrap" }}>
         <div style={{ flex: 1, minWidth: 200 }}>
@@ -510,8 +522,14 @@ export default function DoctorView({ selectedHospital, selectedDate }) {
             <div key={p.id} style={{ ...patientCardStyle, flexDirection: "column", alignItems: "flex-start" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 600, fontSize: 14, color: "#1a202c" }}>{p.name}</div>
-                  <div style={{ fontSize: 12, color: "#718096", marginTop: 2 }}>{p.slot}</div>
+                  <div style={{ fontWeight: 600, fontSize: 14, color: "#1a202c" }}>
+                    {p.name}
+                    {p.is_emergency && <span style={emergencyBadgeStyle}>🚨 EMERGENCY</span>}
+                  </div>
+                  <div style={{ fontSize: 12, color: "#718096", marginTop: 2 }}>
+                    {p.slot}
+                    {p.symptoms && <span style={{ fontStyle: "italic", marginLeft: 8 }}>- {p.symptoms}</span>}
+                  </div>
                 </div>
                 <div style={{ display: "flex", gap: 8 }}>
                   <button
@@ -553,8 +571,14 @@ export default function DoctorView({ selectedHospital, selectedDate }) {
             <div key={p.id} style={{ ...patientCardStyle, flexDirection: "column", alignItems: "flex-start" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 600, fontSize: 14, color: "#1a202c" }}>{p.name}</div>
-                  <div style={{ fontSize: 12, color: "#718096", marginTop: 2 }}>{p.slot}</div>
+                  <div style={{ fontWeight: 600, fontSize: 14, color: "#1a202c" }}>
+                    {p.name}
+                    {p.is_emergency && <span style={emergencyBadgeStyle}>🚨 EMERGENCY</span>}
+                  </div>
+                  <div style={{ fontSize: 12, color: "#718096", marginTop: 2 }}>
+                    {p.slot}
+                    {p.symptoms && <span style={{ fontStyle: "italic", marginLeft: 8 }}>- {p.symptoms}</span>}
+                  </div>
                 </div>
                 <div style={{ display: "flex", gap: 8 }}>
                   <button

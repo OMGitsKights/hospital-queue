@@ -6,16 +6,16 @@ This document outlines how **CareFlo** stacks up against existing market solutio
 
 We compared **CareFlo** against major industry players: **Practo**, **Zocdoc**, and distinct **Queue Management Systems (QMS)**.
 
-| Feature | 🌊 CareFlo (Our Solution) | 🦄 Practo | ⚡ Zocdoc | 📟 Traditional QMS |
-| :--- | :--- | :--- | :--- | :--- |
-| **Core Focus** | **End-to-End Queue Optimization** | Doctor Discovery & booking | Booking & Insurance Check | Physical Token Management |
-| **Real-time Queue Tracking** | ✅ **Yes (Live Dashboard)** | ❌ No (Appointment only) | ❌ No | ✅ Yes (Hardware heavy) |
-| **User Interface** | **Minimalist & Accessible** | Information Dense | Clean but Complex | LED Boards / Kiosks |
-| **Language Support** | ✅ **English, Hindi, Telugu** | English (Mostly) | English (US focus) | N/A |
-| **Digital Prescriptions** | ✅ **Integrated & Instant** | Yes (External/Upload) | No | No |
-| **Hardware Required** | ❌ **None (Run on any Browser)** | Smartphone/PC | Smartphone/PC | ❌ Tokens/Printers/Screens |
-| **Login Friction** | **Zero-Friction Token Auth** | Email/OTP required | Sign-up required | None (Walk-in) |
-| **Cost to Deploy** | 📉 **Zero (Open Source)** | 💰 High SaaS Fees | 💰 Per Booking Fee | 💰 Hardware Costs |
+| Feature | 🌊 CareFlo (Our Solution) | 🦄 Practo | ⚡ Zocdoc | 🏥 MediBuddy | 📟 Traditional QMS |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Core Focus** | **End-to-End Queue Optimization** | Doctor Discovery & booking | Booking & Insurance Check | Telemedicine & Health Plans | Physical Token Management |
+| **Real-time Queue Tracking** | ✅ **Yes (Live Dashboard)** | ❌ No (Appointment only) | ❌ No | ❌ No (Appointment only) | ✅ Yes (Hardware heavy) |
+| **User Interface** | **Minimalist & Accessible** | Information Dense | Clean but Complex | App-centric, Feature Rich | LED Boards / Kiosks |
+| **Language Support** | ✅ **English, Hindi, Telugu** | English (Mostly) | English (US focus) | 16 Indian Languages | N/A |
+| **Digital Prescriptions** | ✅ **Integrated & Instant** | Yes (External/Upload) | No | Yes (Upload Required) | No |
+| **Hardware Required** | ❌ **None (Run on any Browser)** | Smartphone/PC | Smartphone/PC | Smartphone Required | ❌ Tokens/Printers/Screens |
+| **Login Friction** | **Zero-Friction Token Auth** | Email/OTP required | Sign-up required | Email/OTP required | None (Walk-in) |
+| **Cost to Deploy** | 📉 **Zero (Open Source)** | 💰 High SaaS Fees | 💰 Per Booking Fee | 💰 Subscription Plans (₹999-₹12,000/year) | 💰 Hardware Costs |
 
 ---
 

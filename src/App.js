@@ -147,10 +147,6 @@ export default function App() {
         )}
       </div>
 
-      <div style={{ width: 360 }}>
-        {authState.role === "doctor" ? null : null}
-      </div>
-
       <ResetButton
         setSelectedHospital={setSelectedHospital}
         setResetToken={setResetToken}

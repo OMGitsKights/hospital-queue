@@ -7,6 +7,7 @@ import {
 } from "./constants";
 import { getTranslation } from "./translations";
 import * as AuthService from "./AuthService";
+import SymptomChecker from "./SymptomChecker";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001"; // keep in sync with backend
 
@@ -16,7 +17,9 @@ export default function AppointmentForm({ onHospitalSelect, setSelectedDate, res
   const [hospital, setHospital] = useState("");
   const [date, setDate] = useState("");
   const [slot, setSlot] = useState("");
+  const [symptoms, setSymptoms] = useState("");
   const [message, setMessage] = useState("");
+  const [showSymptomChecker, setShowSymptomChecker] = useState(false);
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -61,6 +64,7 @@ export default function AppointmentForm({ onHospitalSelect, setSelectedDate, res
     setHospital("");
     setDate("");
     setSlot("");
+    setSymptoms("");
     setMessage("");
   }, [resetToken]);
 
@@ -85,6 +89,11 @@ export default function AppointmentForm({ onHospitalSelect, setSelectedDate, res
         b.department === department &&
         b.slot === s
     );
+
+  const handleDepartmentFromSymptom = (selectedDepartment) => {
+    setDepartment(selectedDepartment);
+    setMessage(`Department set to ${selectedDepartment} based on your symptoms`);
+  };
 
   const renderSlots = (slots) => {
     if (!date || isPastDate(date)) return <p>No slots available</p>;
@@ -130,7 +139,7 @@ export default function AppointmentForm({ onHospitalSelect, setSelectedDate, res
       const res = await AuthService.authFetch(`${BACKEND_URL}/book`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, hospital, department, shift, date, slot, reference: referenceNumber }),
+        body: JSON.stringify({ name, hospital, department, shift, date, slot, symptoms, reference: referenceNumber }),
       });
 
       if (res.status === 401) {
@@ -195,6 +204,24 @@ export default function AppointmentForm({ onHospitalSelect, setSelectedDate, res
           <option key={d}>{d}</option>
         ))}
       </select>
+      <button
+        type="button"
+        onClick={() => setShowSymptomChecker(true)}
+        style={{
+          marginLeft: "10px",
+          padding: "8px 16px",
+          backgroundColor: "#3498db",
+          color: "white",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+          fontSize: "13px",
+          fontWeight: "500",
+        }}
+      >
+        {getTranslation(language, "notSureWhichDepartment")}
+      </button>
+      <br /><br />
 
       <select value={hospital} onChange={(e) => setHospital(e.target.value)}>
         <option value="">{getTranslation(language, "selectHospital")}</option>
@@ -208,6 +235,14 @@ export default function AppointmentForm({ onHospitalSelect, setSelectedDate, res
         min={today}
         value={date}
         onChange={(e) => setDate(e.target.value)}
+      />
+
+      <br />
+      <textarea
+        placeholder={getTranslation(language, "describeSymptoms") || "Describe symptoms (e.g. chest pain, headache)"}
+        value={symptoms}
+        onChange={(e) => setSymptoms(e.target.value)}
+        style={{ width: "60%", height: "32px", padding: "6px", borderRadius: "4px", border: "1px solid #ccc", boxSizing: "border-box", fontSize: "11px" }}
       />
 
       {hospital && department && date && (
@@ -231,6 +266,13 @@ export default function AppointmentForm({ onHospitalSelect, setSelectedDate, res
       <br />
       <button onClick={handleBook}>{getTranslation(language, "book")}</button>
       <p>{message}</p>
+
+      <SymptomChecker
+        isOpen={showSymptomChecker}
+        onClose={() => setShowSymptomChecker(false)}
+        onSelectDepartment={handleDepartmentFromSymptom}
+        language={language}
+      />
     </div>
   );
 }
